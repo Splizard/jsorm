@@ -34,7 +34,7 @@ func Error(w http.ResponseWriter, message string) {
 	fmt.Fprint(w, marshal(ServerMessage{Code:Failure, Message:message}))
 }
 
-func Warning(w http.ResponseWriter, message string) {
+func Warn(w http.ResponseWriter, message string) {
 	w.Header().Add("Content-Type", "application/json")
 	fmt.Fprint(w, marshal(ServerMessage{Code:Warning, Message:message}))
 }
