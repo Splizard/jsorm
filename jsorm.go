@@ -13,6 +13,7 @@ const (
 	Success = iota
 	Failure
 	Unauthorised
+	Warning
 )
 
 type ServerMessage struct {
@@ -33,6 +34,11 @@ func Error(w http.ResponseWriter, message string) {
 	fmt.Fprint(w, marshal(ServerMessage{Code:Failure, Message:message}))
 }
 
+func Warning(w http.ResponseWriter, message string) {
+	w.Header().Add("Content-Type", "application/json")
+	fmt.Fprint(w, marshal(ServerMessage{Code:Warning, Message:message}))
+}
+
 func Code(w http.ResponseWriter, code int, message string) {
 	w.Header().Add("Content-Type", "application/json")
 	fmt.Fprint(w, marshal(ServerMessage{Code:code, Message:message}))
@@ -48,7 +54,12 @@ func AuthError(w http.ResponseWriter, message string) {
 	AuthenticationError(w, message)
 }
 
-func Send(w http.ResponseWriter, message string) {
+func Message(w http.ResponseWriter, message string) {
 	w.Header().Add("Content-Type", "application/json")
 	fmt.Fprint(w, marshal(ServerMessage{Code:Success, Message:message}))
+}
+
+func Send(w http.ResponseWriter, object {}interface) {
+	w.Header().Add("Content-Type", "application/json")
+	fmt.Fprint(w, marshal(object}))
 }

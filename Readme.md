@@ -14,13 +14,14 @@ This is a very simple library for sending server messages and errors.
 			
 			if ServerIsTooBusyAtTheMoment() {
 				jsorm.Code(writer, ServerBusy, "The Server is way too busy right now!")
+				return
 			}
 		
 			if output, err := MyFunction(...); err != nil {
 				jsorm.Error(writer, err.Error())
 				return
 			} else {
-				jsorm.Send(writer, fmt.Sprint(output))
+				jsorm.Send(writer, output)
 				return
 			}
 		}
