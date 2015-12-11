@@ -61,5 +61,5 @@ func Message(w http.ResponseWriter, message string) {
 
 func Send(w http.ResponseWriter, object {}interface) {
 	w.Header().Add("Content-Type", "application/json")
-	fmt.Fprint(w, marshal(object}))
+	fmt.Fprint(w, marshal(object))
 }
