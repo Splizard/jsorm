@@ -59,7 +59,7 @@ func Message(w http.ResponseWriter, message string) {
 	fmt.Fprint(w, marshal(ServerMessage{Code:Success, Message:message}))
 }
 
-func Send(w http.ResponseWriter, object {}interface) {
+func Send(w http.ResponseWriter, object interface{}) {
 	w.Header().Add("Content-Type", "application/json")
 	fmt.Fprint(w, marshal(object))
 }
