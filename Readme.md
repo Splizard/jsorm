@@ -9,6 +9,7 @@ This is a very simple library for sending server messages and errors.
 		func handler(writer http.ResponseWriter, request *http.Request) {
 			if !UserIsLoggedIn(request) {
 				jsorm.AuthError(writer, "You are not logged in!")
+				return
 			} 
 			
 			if ServerIsTooBusyAtTheMoment() {
@@ -18,8 +19,10 @@ This is a very simple library for sending server messages and errors.
 		
 			if output, err := MyFunction(...); err != nil {
 				jsorm.Error(writer, err.Error())
+				return
 			} else {
 				jsorm.Send(writer, output)
+				return
 			}
 		}
 ```
