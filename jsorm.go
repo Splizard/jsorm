@@ -32,6 +32,7 @@ func marshal(object interface{}) string {
 func Error(w http.ResponseWriter, message string) {
 	w.Header().Add("Content-Type", "application/json")
 	fmt.Fprint(w, marshal(ServerMessage{Code:Failure, Message:message}))
+	panic(message)
 }
 
 func Warn(w http.ResponseWriter, message string) {
@@ -48,6 +49,7 @@ func AuthenticationError(w http.ResponseWriter, message string) {
 	w.WriteHeader(http.StatusUnauthorized)
 	w.Header().Add("Content-Type", "application/json")
 	fmt.Fprint(w, marshal(ServerMessage{Code:Unauthorised, Message:message}))
+	panic(message)
 }
 
 func AuthError(w http.ResponseWriter, message string) {
